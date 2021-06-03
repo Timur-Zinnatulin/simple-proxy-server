@@ -1,7 +1,7 @@
 import socket
 from threading import Thread
 
-#Class for requests 
+#Class for HTTP requests
 class Request:
     def __init__(self, orig: bytes):
         self.original = orig
@@ -14,6 +14,7 @@ class Request:
         self.port = None
 
     @classmethod
+    #Converts byte sequence into an instance of Request class
     def parse(cls, request: bytes):
         request_instance = cls(orig=request)
 
@@ -52,7 +53,7 @@ class ProxyServer:
     def run(self):
         self.client_socket.bind((self.host, self.port))
         self.client_socket.listen(15)
-        print(f"Proxy server server is running on {self.host}:{self.port}")
+        print(f"Proxy server is running on {self.host}:{self.port}")
 
         while True:
             client, addr = self.client_socket.accept()
